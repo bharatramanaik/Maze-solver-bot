@@ -1,0 +1,38 @@
+[(0, 1), (0, 1), (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (9, 2), (9, 3), (9, 4), (9, 5), (9, 6), (9, 7), (9, 8), (9, 9), (9, 10), (9, 11), (9, 12), (9, 13), (10, 13), (11, 13), (11, 14), (11, 15), (11, 16), (11, 17), (12, 17), (13, 17), (13, 18), (13, 19), (14, 19), (15, 19), (15, 18), (15, 17), (16, 17), (17, 17), (18, 17), (19, 17), (19, 18), (19, 19)]
+
+['moveForward', 'moveForward', 'moveForward', 'moveForward',
+ 'moveForward', 'moveForward', 'moveForward', 'moveForward', 
+ 'moveForward', 'turnRightA', 'moveForward', 'moveForward', 
+ 'moveForward', 'moveForward', 'moveForward', 'moveForward', 
+ 'moveForward', 'moveForward', 'moveForward', 'moveForward', 
+ 'moveForward', 'moveForward', 'turnLeftA', 'moveForward', 
+ 'moveForward', 'turnRightA', 'moveForward', 'moveForward', 
+ 'moveForward', 'moveForward', 'turnLeftA', 'moveForward', 
+ 'moveForward', 'turnRightA', 'moveForward', 'moveForward', 
+ 'turnLeftA', 'moveForward', 'moveForward', 'turnLeftA', 
+ 'moveForward', 'moveForward', 'turnRightA', 'moveForward', 
+ 'moveForward', 'moveForward', 'moveForward', 'turnRight', 
+ 'moveForward', 'moveForward']
+
+
+
+
+
+
+
+['moveForward', 'moveForward', 'moveForward', 'turnRight', 
+'moveForward', 'moveForward', 'turnLeft', 'moveForward', 
+'turnLeft', 'moveForward', 'moveForward', 'moveForward', 
+'moveForward', 'moveForward', 'moveForward', 'moveForward', 
+'turnLeft', 'moveForward', 'moveForward', 'turnLeft', 
+'moveForward', 'moveForward', 'turnRight', 'moveForward', 
+'moveForward', 'moveForward', 'moveForward', 'moveForward', 
+'moveForward', 'moveForward', 'moveForward', 'turnRight', 
+'moveForward', 'moveForward', 'moveForward', 'moveForward', 
+'moveForward', 'moveForward', 'turnLeft', 'moveForward', 
+'moveForward', 'moveForward', 'moveForward', 'turnLeft', 
+'moveForward', 'moveForward', 'turnRight', 'moveForward', 
+'moveForward', 'turnRight', 'moveForward', 'moveForward', 
+'moveForward', 'moveForward', 'moveForward', 'moveForward', 
+'moveForward', 'moveForward', 'turnLeft', 'moveForward', 
+'moveForward']
