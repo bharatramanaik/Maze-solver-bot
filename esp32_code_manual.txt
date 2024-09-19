@@ -102,3 +102,4 @@ int calculateTime(int distance) {
   int time = (distance / 10) * 1000; // Assume 1 second for 10 cm
   return time;
 }
+
