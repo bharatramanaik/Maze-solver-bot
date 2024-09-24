@@ -1,0 +1,37 @@
+1. Cumulative Reward (Total Reward)
+
+2. Episode Length
+
+3. Success Rate
+
+4. Path Efficiency
+
+5. Exploration vs Exploitation Ratio
+
+6. Learning Curve (Reward Over Time)
+
+7. Convergence Time
+
+8. State Coverage
+
+9. Q-value Stability
+
+10. Average Number of Steps per Episode
+
+12. Wall Hits / Collision Rate
+
+13. Discounted Cumulative Reward
+
+14. Exploration Efficiency
+
+15. Regret
+
+16. Policy Entropy
+
+17. Return on Investment (ROI)
+
+18. Reward Clipping Rate
+
+19. Episode Termination Reason
+
+20. Sample Efficiency
