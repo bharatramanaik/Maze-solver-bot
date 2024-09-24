@@ -1,60 +1,52 @@
 #include <WiFi.h>
-#include <PubSubClient.h>
-#include <ESP32Servo.h>
+#include <WebServer.h>
+#include <WebSocketsServer.h>
 
+// Wi-Fi credentials
+const char* ssid = "mynet";
+const char* password = "12345678bharat0";
 
-// Update these with your Wi-Fi credentials and MQTT broker address
-const char* ssid = "your-SSID";
-const char* password = "your-PASSWORD";
-const char* mqtt_server = "your-laptop-ip-address";  // Use your laptop's IP address
-
-WiFiClient espClient;
-PubSubClient client(espClient);
+// WebSocket server on port 81
+WebSocketsServer webSocket = WebSocketsServer(81);
 
 // Motor A pins
 #define IN1 16
 #define IN2 17
-#define ENA 21  // Motor A enable pin
+#define ENA 21  // Motor A enable pin (PWM for speed control)
 
 // Motor B pins
 #define IN3 18
 #define IN4 19
-#define ENB 22  // Motor B enable pin
-
-// Servo motor pin
-#define servoPin 23
-
-// Servo object
-Servo myservo;
+#define ENB 22  // Motor B enable pin (PWM for speed control)
 
 // Define distance per matrix cell in cm
 #define CELL_DISTANCE 10
 
-// Callback function when a message is received
-void callback(char* topic, byte* payload, unsigned int length) {
-  String message = "";
-  for (int i = 0; i < length; i++) {
-    message += (char)payload[i];
-  }
+// WebSocket event handler
+void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+  if (type == WStype_TEXT) {
+    
+    
 
-  // Serial.print("Message received: ");
-  // Serial.println(message);
-
-  // Handle different control messages
-  if (message == "left") {
-    // Code to turn left
-    turnleft();
-  }
-  else if (message == "right") {
-    // Code to turn right
-    turnright();
-  }
-  else if (message == "forward") {
-    // Code to go forward
-    moveForward(CELL_DISTANCE);
+    if (String((char*)payload) == "turnLeft") {
+      Serial.print("Received: ");
+      Serial.println(String((char*)payload));
+      turnLeft();
+    }
+    else if (String((char*)payload) == "turnRight") {
+      Serial.print("Received: ");
+      Serial.println(String((char*)payload));
+      turnRight();
+    }
+    else if (String((char*)payload) == "moveForward") {
+      Serial.print("Received: ");
+      Serial.println(String((char*)payload));
+      moveForward(CELL_DISTANCE);
+    }
   }
 }
 
+// Function to move forward a given distance
 void moveForward(int distance) {
   int time = calculateTime(distance);
   digitalWrite(IN1, HIGH);
@@ -65,24 +57,27 @@ void moveForward(int distance) {
   stopMotors();
 }
 
+// Function to turn left
 void turnLeft() {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  delay(500); // Adjust this delay for a proper 90-degree turn
+  delay(500);  // Adjust for a proper 90-degree turn
   stopMotors();
 }
 
+// Function to turn right
 void turnRight() {
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  delay(500); // Adjust this delay for a proper 90-degree turn
+  delay(500);  // Adjust for a proper 90-degree turn
   stopMotors();
 }
 
+// Stop all motors
 void stopMotors() {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
@@ -90,6 +85,13 @@ void stopMotors() {
   digitalWrite(IN4, LOW);
 }
 
+// Function to calculate the time needed to move forward based on distance
+int calculateTime(int distance) {
+  int time = (distance / 10) * 1000;  // Assume 1 second for 10 cm
+  return time;
+}
+
+// Setup Wi-Fi connection
 void setup_wifi() {
   delay(10);
   Serial.println();
@@ -105,31 +107,14 @@ void setup_wifi() {
 
   Serial.println("");
   Serial.println("WiFi connected");
-  Serial.println("IP address: ");
+  Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-}
-
-void reconnect() {
-  // Loop until we're reconnected
-  while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    // Attempt to connect to the MQTT broker
-    if (client.connect("ESP32Client")) {
-      Serial.println("connected");
-      // Subscribe to the control topic
-      client.subscribe("esp32/control");
-    } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
-      delay(5000);
-    }
-  }
 }
 
 void setup() {
   Serial.begin(115200);
-  // Motor pins as outputs
+
+  // Set motor pins as outputs
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
@@ -137,30 +122,19 @@ void setup() {
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
 
-  // Attach the servo motor to its pin
-  myservo.attach(servoPin);
+  // Set motor speed (can use PWM for speed control, e.g., 255 = full speed)
+  analogWrite(ENA, 255);  // Full speed for motor A
+  analogWrite(ENB, 255);  // Full speed for motor B
 
-  // Set motor speed to full
-  digitalWrite(ENA, HIGH);
-  digitalWrite(ENB, HIGH);
-
-  // Center the servo motor (looking straight ahead)
-  myservo.write(90);
+  // Setup Wi-Fi
   setup_wifi();
-  client.setServer(mqtt_server, 1883);  // Connect to the broker running on your laptop
-  client.setCallback(callback);
+
+  // Start WebSocket server
+  webSocket.begin();
+  webSocket.onEvent(webSocketEvent);  // Register event handler
 }
 
 void loop() {
-  if (!client.connected()) {
-    reconnect();
-  }
-  client.loop();
+  // Handle WebSocket communication
+  webSocket.loop();
 }
-
-// Calculate time to move forward based on distance
-int calculateTime(int distance) {
-  int time = (distance / 10) * 1000; // Assume 1 second for 10 cm
-  return time;
-}
-

@@ -30,7 +30,7 @@ def generate_matrix(image_path):
     return mapped_matrix
 
 # Example usage
-image_path = "m1.png"  # Replace with your image path
+image_path = "E:/Major_project/Major Project/Major Project/Final_model/archive/3.png"  # Replace with your image path
 matrix = generate_matrix(image_path)
 
 # Print the matrix
