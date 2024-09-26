@@ -3,8 +3,8 @@
 #include <WebSocketsServer.h>
 
 // Wi-Fi credentials
-const char* ssid = "mynet";
-const char* password = "12345678bharat0";
+const char* ssid = "Amshu GT 2";
+const char* password = "Amshu@399";
 
 // WebSocket server on port 81
 WebSocketsServer webSocket = WebSocketsServer(81);
@@ -20,7 +20,7 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 #define ENB 22  // Motor B enable pin (PWM for speed control)
 
 // Define distance per matrix cell in cm
-#define CELL_DISTANCE 10
+#define CELL_DISTANCE 5
 
 // WebSocket event handler
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
@@ -87,7 +87,7 @@ void stopMotors() {
 
 // Function to calculate the time needed to move forward based on distance
 int calculateTime(int distance) {
-  int time = (distance / 10) * 1000;  // Assume 1 second for 10 cm
+  int time = (distance / 5) * 1000;  // Assume 1 second for 10 cm
   return time;
 }
 
