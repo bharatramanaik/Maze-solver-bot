@@ -1,0 +1,35 @@
+Success Rate
+
+Path Efficiency
+
+Exploration vs Exploitation Ratio
+
+Convergence Time
+
+State Coverage
+
+Q-value Stability
+
+Wall Hits / Collision Rate 
+
+Discounted Cumulative Reward
+
+Exploration Efficiency
+
+Regret
+
+Policy Entropy
+
+Return on Investment (ROI)
+
+Reward Clipping Rate
+
+Episode Termination Reason
+
+Sample Efficiency
+
+
+Average Number of Steps per Episode//
+Cumulative Reward (Total Reward)//
+Episode Length//
+Learning Curve (Reward Over Time)//

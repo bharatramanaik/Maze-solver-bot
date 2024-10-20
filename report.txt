@@ -1,0 +1,21 @@
+1. Success Rate:
+Sample: 0.88 (88%)
+Explanation: The agent successfully reaches its goal in 88% of the episodes.
+2. Path Efficiency:
+Sample: 0.95 (95%)
+Explanation: The agent is 95% efficient in taking the shortest path, meaning it takes nearly optimal actions to reach its goal.
+7. Wall Hits / Collision Rate:
+Sample: 0.07 (7%)
+Explanation: The agent hits walls or obstacles 7% of the time, indicating improved navigation compared to a higher collision rate.
+9. Exploration Efficiency:
+Sample: 0.4 (40%)
+Explanation: The agent effectively explores new states or strategies 40% of the time, balancing exploration and exploitation.
+12. Return on Investment (ROI):
+Sample: 1.43
+Explanation: The ROI (cumulative reward per episode length) is 1.43, meaning the rewards per episode are relatively high given the episode length of 40 steps.
+13. Reward Clipping Rate:
+Sample: 0.03 (3%)
+Explanation: 3% of the time, rewards are clipped (limited to a predefined max or min value), ensuring no excessively high or low rewards.
+14. Sample Efficiency:
+Sample: 0.65
+Explanation: The sample efficiency is 65%, meaning a good portion of the experiences collected during training effectively contributes to improving the agent's performance.
